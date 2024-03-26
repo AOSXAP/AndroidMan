@@ -34,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _counter = "";
   static String changeTitle = "Command";
+  static final List _friendsList = [''];
 
   void _incrementCounter() {
     setState((){
@@ -65,13 +66,35 @@ class _MyHomePageState extends State<MyHomePage> {
 
       setState(() {
         changeTitle = file_name;
-        print(file_name);
+        _friendsList.clear();
         if(js.isNotEmpty){
-          _counter = comm[file_name]['DESCRIPTION'].toString(); 
+          for(var key in comm[file_name].keys){
+            _friendsList.add(comm[file_name][key].toString());
+          }
         }
       });
     }
 
+
+
+List<Widget> _getFriends(){
+  List<Widget> friendsTextFields = [];
+  for(int i=0; i<_friendsList.length; i++){
+  friendsTextFields.add(
+    Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Column(
+        children: [
+        Text(
+          _friendsList[i].toString(),
+        )
+        ],
+      ),
+    )
+  );
+}
+return friendsTextFields;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              _counter,
-              style: const TextStyle(fontSize: 15),
-            ),
+          ..._getFriends()
           ],
         ),
       ),
