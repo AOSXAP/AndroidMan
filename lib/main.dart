@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
+import 'dart:math';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static const String _title = 'Flutter Stateful Clicker Counter';
+  static const String _title = 'Command to run';
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: _title,
       theme: ThemeData(
         // useMaterial3: false,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue
       ),
       home: const MyHomePage(),
     );
@@ -36,15 +37,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _counter = "";
+  static String changeTitle = "Command";
 
   void _incrementCounter() {
     setState((){
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-
       //getJson();
       _listofFiles();
       
@@ -54,38 +50,29 @@ class _MyHomePageState extends State<MyHomePage> {
   void _listofFiles() async {
       final file = io.Directory("assets/json/").listSync(); 
       String js = "";
+      String file_name = "";
 
-      for(int i = 0; i < file.length; i++){
-        final String jsonString = await rootBundle.loadString(file.elementAt(i).path);
-        js += (jsonString);
+      var rng = Random();
+      int chosenFile = rng.nextInt(file.length);
+
+      final String jsonString = await rootBundle.loadString(file.elementAt(chosenFile).path);
+      js = (jsonString);
+
+      file_name = file.elementAt(chosenFile).path.replaceAll(".json", "");
+      file_name = file_name.replaceAll("assets/json/", "");
+
+      Map<String,dynamic> comm =  Map<String,dynamic>();
+
+      if(jsonString != "") {
+        comm  = jsonDecode(jsonString) as Map<String, dynamic>;
       }
 
       setState(() {
-        _counter = js; 
+        changeTitle = file_name;
+        if(js != "")_counter = comm[file_name]['DESCRIPTION'].toString(); 
       });
     }
 
-  Future<String> loadJsonAsset() async {
-    String alljson;
-    List<String> files = ["assets/json/ls.json","assets/json/ls1.json"];
-
-    for(int i = 0; i < files.length; i++){
-      final String jsonString = await rootBundle.loadString(files[i]);
-      print(jsonString);
-    }
-
-    final String jsonString = await rootBundle.loadString('assets/json/ls.json');
-    //final data = jsonDecode(jsonString);
-    return jsonString;
-  }
-
-  void getJson() async{
-    String counter = await loadJsonAsset();
-
-    setState(() {
-      _counter = counter;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: const Text('Flutter Demo Click Counter'),
+        title: Text(changeTitle),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -116,12 +103,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
               _counter,
-              style: const TextStyle(fontSize: 25),
+              style: const TextStyle(fontSize: 15),
             ),
           ],
         ),

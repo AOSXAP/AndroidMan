@@ -1,0 +1,24 @@
+{
+   "users" : {
+      "AUTHOR" : [
+         "Written by Joseph Arceneaux and David MacKenzie. ",
+         "REPORTING BUGS GNU coreutils online help: <https://www.gnu.org/software/coreutils/> Report any translation bugs to <https://translationproject.org/team/> "
+      ],
+      "COPYRIGHT" : [
+         "Copyright  ©  2020  Free  Software  Foundation,  Inc.   License  GPLv3+:  GNU  GPL  version   3   or   later <https://gnu.org/licenses/gpl.html>. This is free software: you are free to change and redistribute it.  There is NO WARRANTY, to the extent per‐ mitted by law. ",
+         "SEE ALSO getent(1), who(1) ",
+         "Full documentation <https://www.gnu.org/software/coreutils/users> or available locally via: info '(coreutils) users invocation' "
+      ],
+      "DESCRIPTION" : [
+         "Output  who  is  currently  logged  in  according  to  FILE.   If  FILE is not specified, use /var/run/utmp. /var/log/wtmp as FILE is common. ",
+         "--help display this help and exit ",
+         "--version output version information and exit "
+      ],
+      "NAME" : [
+         "users - print the user names of users currently logged in to the current host "
+      ],
+      "SYNOPSIS" : [
+         "users [OPTION]... [FILE] "
+      ]
+   }
+}

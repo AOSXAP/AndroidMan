@@ -1,0 +1,23 @@
+{
+   "yes" : {
+      "AUTHOR" : [
+         "Written by David MacKenzie. ",
+         "REPORTING BUGS GNU coreutils online help: <https://www.gnu.org/software/coreutils/> Report any translation bugs to <https://translationproject.org/team/> "
+      ],
+      "COPYRIGHT" : [
+         "Copyright   ©   2020   Free  Software  Foundation,  Inc.   License  GPLv3+:  GNU  GPL  version  3  or  later <https://gnu.org/licenses/gpl.html>. This is free software: you are free to change and redistribute it.  There is NO WARRANTY, to the extent per‐ mitted by law. ",
+         "SEE ALSO Full documentation <https://www.gnu.org/software/coreutils/yes> or available locally via: info '(coreutils) yes invocation' "
+      ],
+      "DESCRIPTION" : [
+         "Repeatedly output a line with all specified STRING(s), or 'y'. ",
+         "--help display this help and exit ",
+         "--version output version information and exit "
+      ],
+      "NAME" : [
+         "yes - output a string repeatedly until killed "
+      ],
+      "SYNOPSIS" : [
+         "yes [STRING]... yes OPTION "
+      ]
+   }
+}

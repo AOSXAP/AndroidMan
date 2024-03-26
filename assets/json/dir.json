@@ -1,12 +1,12 @@
 {
-   "ls" : {
+   "dir" : {
       "AUTHOR" : [
          "Written by Richard M. Stallman and David MacKenzie. ",
          "REPORTING BUGS GNU coreutils online help: <https://www.gnu.org/software/coreutils/> Report any translation bugs to <https://translationproject.org/team/> "
       ],
       "COPYRIGHT" : [
          "Copyright  ©  2020  Free  Software  Foundation,  Inc.   License  GPLv3+:  GNU  GPL  version   3   or   later <https://gnu.org/licenses/gpl.html>. This is free software: you are free to change and redistribute it.  There is NO WARRANTY, to the extent per‐ mitted by law. ",
-         "SEE ALSO Full documentation <https://www.gnu.org/software/coreutils/ls> or available locally via: info '(coreutils) ls invocation' "
+         "SEE ALSO Full documentation <https://www.gnu.org/software/coreutils/dir> or available locally via: info '(coreutils) dir invocation' "
       ],
       "DESCRIPTION" : [
          "List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is specified. ",
@@ -81,10 +81,10 @@
          "2      if serious trouble (e.g., cannot access command-line argument). "
       ],
       "NAME" : [
-         "ls - list directory contents "
+         "dir - list directory contents "
       ],
       "SYNOPSIS" : [
-         "ls [OPTION]... [FILE]... "
+         "dir [OPTION]... [FILE]... "
       ]
    }
 }

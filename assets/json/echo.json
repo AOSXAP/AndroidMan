@@ -1,0 +1,40 @@
+{
+   "echo" : {
+      "AUTHOR" : [
+         "Written by Brian Fox and Chet Ramey. ",
+         "REPORTING BUGS GNU coreutils online help: <https://www.gnu.org/software/coreutils/> Report any translation bugs to <https://translationproject.org/team/> "
+      ],
+      "COPYRIGHT" : [
+         "Copyright  ©  2020  Free  Software  Foundation,  Inc.   License  GPLv3+:  GNU  GPL  version   3   or   later <https://gnu.org/licenses/gpl.html>. This is free software: you are free to change and redistribute it.  There is NO WARRANTY, to the extent per‐ mitted by law. ",
+         "SEE ALSO Full documentation <https://www.gnu.org/software/coreutils/echo> or available locally via: info '(coreutils) echo invocation' "
+      ],
+      "DESCRIPTION" : [
+         "Echo the STRING(s) to standard output. ",
+         "-n     do not output the trailing newline ",
+         "-e     enable interpretation of backslash escapes ",
+         "-E     disable interpretation of backslash escapes (default) ",
+         "--help display this help and exit ",
+         "--version output version information and exit ",
+         "If -e is in effect, the following sequences are recognized: ",
+         "&#92;&#92;     backslash ",
+         "&#92;a     alert (BEL) ",
+         "&#92;b     backspace ",
+         "&#92;c     produce no further output ",
+         "&#92;e     escape ",
+         "&#92;f     form feed ",
+         "&#92;n     new line ",
+         "&#92;r     carriage return ",
+         "&#92;t     horizontal tab ",
+         "&#92;v     vertical tab ",
+         "&#92;0NNN  byte with octal value NNN (1 to 3 digits) ",
+         "&#92;xHH   byte with hexadecimal value HH (1 to 2 digits) ",
+         "NOTE:  your  shell  may  have  its own version of echo, which usually supersedes the version described here. Please refer to your shell's documentation for details about the options it supports. "
+      ],
+      "NAME" : [
+         "echo - display a line of text "
+      ],
+      "SYNOPSIS" : [
+         "echo [SHORT-OPTION]... [STRING]... echo LONG-OPTION "
+      ]
+   }
+}

@@ -1,0 +1,23 @@
+{
+   "rev" : {
+      "AVAILABILITY" : [
+         "The rev command is part of the util-linux package which can be downloaded from Linux Kernel Archive <https://www.kernel.org/pub/linux/utils/util-linux/>. "
+      ],
+      "DESCRIPTION" : [
+         "The rev utility copies the specified files to standard output, reversing the order of characters in every line. If no files are specified, standard input is read. ",
+         "This utility is a line-oriented tool and it uses in-memory allocated buffer for a whole wide-char line. If the input file is huge and without line breaks than allocate the memory for the file may be unsuccessful. "
+      ],
+      "NAME" : [
+         "rev - reverse lines characterwise "
+      ],
+      "OPTIONS" : [
+         "-V, --version Display version information and exit. ",
+         "-h, --help Display help text and exit. ",
+         "SEE ALSO tac(1) ",
+         "REPORTING BUGS For bug reports, use the issue tracker at https://github.com/karelzak/util-linux/issues. "
+      ],
+      "SYNOPSIS" : [
+         "rev [option] [file...] "
+      ]
+   }
+}

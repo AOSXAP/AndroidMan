@@ -1,0 +1,32 @@
+{
+   "ulimit" : {
+      "ATTRIBUTES" : [
+         "For an explanation of the terms used in this section, see attributes(7). ",
+         "┌──────────┬───────────────┬─────────┐ │Interface │ Attribute     │ Value   │ ├──────────┼───────────────┼─────────┤ │ulimit()  │ Thread safety │ MT-Safe │ └──────────┴───────────────┴─────────┘ ",
+         "CONFORMING TO SVr4, POSIX.1-2001.  POSIX.1-2008 marks ulimit() as obsolete. ",
+         "SEE ALSO bash(1), getrlimit(2), setrlimit(2), sysconf(3) "
+      ],
+      "COLOPHON" : [
+         "This page is part of release 5.10 of the Linux man-pages project.  A description of the project, information about    reporting    bugs,    and    the    latest    version    of    this   page,   can   be   found   at https://www.kernel.org/doc/man-pages/. "
+      ],
+      "DESCRIPTION" : [
+         "Warning:  this  routine is obsolete.  Use getrlimit(2), setrlimit(2), and sysconf(3) instead.  For the shell command ulimit(), see bash(1). ",
+         "The ulimit() call will get or set some limit for the calling process.  The cmd argument can have one of  the following values. ",
+         "UL_GETFSIZE Return the limit on the size of a file, in units of 512 bytes. ",
+         "UL_SETFSIZE Set the limit on the size of a file. ",
+         "3      (Not implemented for Linux.)  Return the maximum possible address of the data segment. ",
+         "4      (Implemented but no symbolic constant provided.)  Return the maximum number of files that the calling process can open. ",
+         "RETURN VALUE On success, ulimit() returns a nonnegative value.  On error, -1 is returned, and errno is set appropriately. "
+      ],
+      "ERRORS" : [
+         "EPERM  An unprivileged process tried to increase a limit. "
+      ],
+      "NAME" : [
+         "ulimit - get and set user limits "
+      ],
+      "SYNOPSIS" : [
+         "#include <ulimit.h> ",
+         "long ulimit(int cmd, long newlimit); "
+      ]
+   }
+}
