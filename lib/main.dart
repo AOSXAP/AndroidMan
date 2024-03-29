@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:io' as io;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/widgets.dart';
 import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       title: _title,
       theme: ThemeData(
         // useMaterial3: false,
-        primarySwatch: Colors.blue
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Color.fromARGB(255, 42, 42, 42),
       ),
       home: const MyHomePage(),
     );
@@ -32,9 +34,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _counter = "";
   static String changeTitle = "Command";
   static final List _friendsList = [''];
+  static final List commands_desc = [''];
 
   void _incrementCounter() {
     setState((){
@@ -67,9 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         changeTitle = file_name;
         _friendsList.clear();
+        commands_desc.clear();
         if(js.isNotEmpty){
           for(var key in comm[file_name].keys){
             _friendsList.add(comm[file_name][key].toString());
+            commands_desc.add(key.toString());
           }
         }
       });
@@ -83,14 +87,34 @@ List<Widget> _getFriends(){
   friendsTextFields.add(
     Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Column(
-        children: [
-        Text(
-          _friendsList[i].toString(),
+      child: Container(
+        height: 200,
+        color: Color.fromARGB(255, 56, 56, 56),
+        alignment: Alignment.topLeft,
+        child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+              Text(
+                commands_desc[i],
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                _friendsList[i],
+                style: const TextStyle(
+                  color: Colors.white,
+                )
+              )
+            ],
+          ),
         )
-        ],
-      ),
-    )
+        )
+      )
   );
 }
 return friendsTextFields;
@@ -100,7 +124,15 @@ return friendsTextFields;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(changeTitle),
+        title: Text(
+          changeTitle,
+          style: const TextStyle(
+            fontSize: 30,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          )
+          ),
+        backgroundColor: Color.fromARGB(255, 42, 42, 42),
       ),
       body: SingleChildScrollView(
         child: Column(
