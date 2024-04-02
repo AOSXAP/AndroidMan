@@ -4,6 +4,9 @@ import 'command.dart';
 
 class StatefulMenu extends StatefulWidget{
   @override
+  const StatefulMenu({super.key});
+
+  @override
   State<StatefulMenu> createState() => Menu();
 }
 
@@ -41,15 +44,6 @@ class Menu extends State<StatefulMenu>{
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           ...menuEntries,
-          TextButton(
-            onPressed: () {
-              setState(() {
-                menuEntries.add(const Text("muie"));
-              });
-                
-            }, 
-            child: const Text("Rapadunga"),
-          )
         ]
       )
     );
