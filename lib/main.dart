@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/menu.dart';
 import 'command.dart';
 
 void main() => runApp(const MyApp());
@@ -7,7 +8,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   static const String _title = 'Command to run';
   // This widget is the root of your application.
-  @override
+  @override 
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color.fromARGB(255, 42, 42, 42),
       ),
-      home: Command("pwd"),
+      home: StatefulMenu(),
     );
   }
 }
