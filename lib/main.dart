@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
 import 'command.dart';
 
 void main() => runApp(const MyApp());
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color.fromARGB(255, 42, 42, 42),
       ),
-      home: Command("ls"),
+      home: Command("pwd"),
     );
   }
 }
