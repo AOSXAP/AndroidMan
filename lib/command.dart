@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+import 'utils/readCommands.dart';
+import "dart:math";
 
 class Command extends StatefulWidget{
   //default command
-  String comm = "ls";
+  String comm = "ls.json";
 
   Command(String commandName){
+    if(!commandName.contains(".json") && commandName != "random"){
+      commandName += ".json";
+    }
     comm = commandName;
   }
 
@@ -24,7 +29,19 @@ class CommandPage extends State<Command> {
   @override
 
   CommandPage(String commandName){
-    _loadCommand(commandName);
+    if(commandName == "random")
+      _randomCommand();
+    else _loadCommand(commandName);
+  }
+
+  void _randomCommand() async {
+    List commands = await readCommand();
+
+    final randomGen = new Random();
+
+    var element = commands[randomGen.nextInt(commands.length)];
+
+    _loadCommand(element);
   }
 
   void _loadCommand(String commandName) async {
@@ -35,13 +52,15 @@ class CommandPage extends State<Command> {
     String fileName = commandName;
 
     final String jsonCommand =
-        await rootBundle.loadString("assets/json/$fileName.json");
+        await rootBundle.loadString("assets/json/$fileName");
 
     var comm = <String, dynamic>{};
 
     if (jsonCommand.isNotEmpty) {
       comm = jsonDecode(jsonCommand) as Map<String, dynamic>;
     }
+
+    fileName = fileName.replaceAll(".json", "");
 
       pageTitle = fileName;
       index = 0;
@@ -80,6 +99,7 @@ class CommandPage extends State<Command> {
                   color: Colors.white,
                 ))));
       }
+
       //display section and paragraphs
       commandSectionsBody.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
