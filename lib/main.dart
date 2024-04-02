@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/menu.dart';
 import 'command.dart';
+import 'utils/readCommands.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override 
   Widget build(BuildContext context) {
+    readCommand();
     return MaterialApp(
       title: _title,
       theme: ThemeData(
