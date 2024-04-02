@@ -12,8 +12,32 @@ class Command extends StatefulWidget{
     if(!commandName.contains(".json") && commandName != "random"){
       commandName += ".json";
     }
+
     comm = commandName;
   }
+
+  static Future<String> listDescription(String command)async {
+    String fileName = command;
+
+    final String jsonCommand =
+        await rootBundle.loadString("assets/json/$fileName");
+
+    var comm = <String, dynamic>{};
+
+    if (jsonCommand.isNotEmpty) {
+      comm = jsonDecode(jsonCommand) as Map<String, dynamic>;
+    }
+
+    fileName = fileName.replaceAll(".json", "");
+
+    if(comm[fileName].length != 0){
+      if(comm[fileName].keys.contains("DESCRIPTION")){
+        return comm[fileName]["DESCRIPTION"][0].toString();
+      }
+    }
+
+    return "";
+  }  
 
   @override
   State<Command> createState() => CommandPage(comm);
@@ -44,7 +68,7 @@ class CommandPage extends State<Command> {
     _loadCommand(element);
   }
 
-  void _loadCommand(String commandName) async {
+  Future<List> _loadCommand(String commandName) async {
     //https://docs.flutter.dev/ui/assets/assets-and-images#asset-bundling
     List loadParagraphs = [[]]; 
     List loadSections = ['']; 
@@ -81,6 +105,8 @@ class CommandPage extends State<Command> {
         _commandParagraphs = loadParagraphs;
         _commandSections = loadSections;
       });
+
+      return loadParagraphs;
   }
 
   List<Widget> _renderCommand() {

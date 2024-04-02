@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/menu.dart';
 import 'command.dart';
 import 'utils/readCommands.dart';
+import 'package:getwidget/getwidget.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: const Color.fromARGB(255, 42, 42, 42),
       ),
-      home: StatefulMenu(),
+      home: StatefulMenu()
     );
   }
 }

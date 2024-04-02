@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/readCommands.dart';
 import 'command.dart';
+import 'dart:math';
+import 'package:getwidget/getwidget.dart';
 
 class StatefulMenu extends StatefulWidget{
   @override
@@ -10,8 +12,13 @@ class StatefulMenu extends StatefulWidget{
   State<StatefulMenu> createState() => Menu();
 }
 
+
 class Menu extends State<StatefulMenu>{
-  List<Widget> menuEntries=[];
+  List<Widget> menuEntries=[GFButton(
+    onPressed: (){},
+    text:"primary"
+)];
+  
 
   @override
   Menu(){
@@ -21,20 +28,31 @@ class Menu extends State<StatefulMenu>{
   void _initListOfCommands() async{
     List commands = await readCommand();
 
-    setState(() {
-      for(var command in commands){
-        menuEntries.add(TextButton(
-            child: Text(command),
+    for(var command in commands){
+      Command initCommand = Command(command);
+      String description = await Command.listDescription(command);
+
+      if(description.length >= 200){
+        description = description.substring(0,196) + " ...";
+      }
+      setState(() {
+            menuEntries.add(TextButton(
+            child: 
+             GFListTile(
+              titleText: command,
+              subTitleText:description,
+              listItemTextColor: Colors.white,
+            ),
           onPressed: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => Command(command),
+                builder: (context) => initCommand,
               ),
             );
           },
         ));
-      }
-    });
+      });
+    }
   }
 
   @override
