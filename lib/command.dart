@@ -4,19 +4,19 @@ import 'dart:convert';
 import 'utils/readCommands.dart';
 import "dart:math";
 
-class Command extends StatefulWidget{
+class Command extends StatefulWidget {
   //default command
   String comm = "ls.json";
 
-  Command(String commandName){
-    if(!commandName.contains(".json") && commandName != "random"){
+  Command(String commandName) {
+    if (!commandName.contains(".json") && commandName != "random") {
       commandName += ".json";
     }
 
     comm = commandName;
   }
 
-  static Future<String> listDescription(String command)async {
+  static Future<String> listDescription(String command) async {
     String fileName = command;
 
     final String jsonCommand =
@@ -30,14 +30,14 @@ class Command extends StatefulWidget{
 
     fileName = fileName.replaceAll(".json", "");
 
-    if(comm[fileName].length != 0){
-      if(comm[fileName].keys.contains("DESCRIPTION")){
+    if (comm[fileName].length != 0) {
+      if (comm[fileName].keys.contains("DESCRIPTION")) {
         return comm[fileName]["DESCRIPTION"][0].toString();
       }
     }
 
     return "";
-  }  
+  }
 
   @override
   State<Command> createState() => CommandPage(comm);
@@ -51,11 +51,11 @@ class CommandPage extends State<Command> {
   static int index = 0;
 
   @override
-
-  CommandPage(String commandName){
-    if(commandName == "random")
+  CommandPage(String commandName) {
+    if (commandName == "random")
       _randomCommand();
-    else _loadCommand(commandName);
+    else
+      _loadCommand(commandName);
   }
 
   void _randomCommand() async {
@@ -70,8 +70,8 @@ class CommandPage extends State<Command> {
 
   Future<List> _loadCommand(String commandName) async {
     //https://docs.flutter.dev/ui/assets/assets-and-images#asset-bundling
-    List loadParagraphs = [[]]; 
-    List loadSections = ['']; 
+    List loadParagraphs = [[]];
+    List loadSections = [''];
 
     String fileName = commandName;
 
@@ -86,27 +86,27 @@ class CommandPage extends State<Command> {
 
     fileName = fileName.replaceAll(".json", "");
 
-      pageTitle = fileName;
-      index = 0;
+    pageTitle = fileName;
+    index = 0;
 
-      if (jsonCommand.isNotEmpty) {
-        for (var key in comm[fileName].keys) {
-          loadParagraphs.add([]);
-          for (var para in comm[fileName][key]) {
-            loadParagraphs[index].add(para.toString());
-          }
-          index += 1;
-          loadSections.add(key.toString());
+    if (jsonCommand.isNotEmpty) {
+      for (var key in comm[fileName].keys) {
+        loadParagraphs.add([]);
+        for (var para in comm[fileName][key]) {
+          loadParagraphs[index].add(para.toString());
         }
+        index += 1;
+        loadSections.add(key.toString());
       }
+    }
 
-      //best way to update when using async/await 
-      setState(() {
-        _commandParagraphs = loadParagraphs;
-        _commandSections = loadSections;
-      });
+    //best way to update when using async/await
+    setState(() {
+      _commandParagraphs = loadParagraphs;
+      _commandSections = loadSections;
+    });
 
-      return loadParagraphs;
+    return loadParagraphs;
   }
 
   List<Widget> _renderCommand() {
@@ -122,7 +122,7 @@ class CommandPage extends State<Command> {
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
             child: Text(_commandParagraphs[i][j],
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                 ))));
       }
 
@@ -130,18 +130,17 @@ class CommandPage extends State<Command> {
       commandSectionsBody.add(Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: Container(
-              //color: Color.fromARGB(255, 56, 56, 56),f
               alignment: Alignment.topLeft,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _commandSections[i+1],
+                      _commandSections[i + 1],
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                           fontSize: 20,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: Colors.deepPurple,
                           fontWeight: FontWeight.bold),
                     ),
                     ...commandParagraphs
@@ -159,9 +158,9 @@ class CommandPage extends State<Command> {
         title: Text(pageTitle,
             style: const TextStyle(
                 fontSize: 30,
-                color: Colors.white,
+                color: Colors.deepPurple,
                 fontWeight: FontWeight.bold)),
-        backgroundColor: const Color.fromARGB(255, 42, 42, 42),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: SingleChildScrollView(
         child: Column(
