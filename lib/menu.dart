@@ -17,11 +17,17 @@ class StatefulMenu extends StatefulWidget {
 
 class Menu extends State<StatefulMenu> {
   List<Widget> menuEntries = [];
-  static String searchedTerm = "ls";
+  static String searchedTerm = "";
+  List<dynamic> commands = [];
 
   @override
   Menu() {
+    _readInitialCommands();
     _initListOfCommands();
+  }
+
+  void _readInitialCommands()async {
+    commands = await readCommand();
   }
 
   void refreshCommands() {
@@ -30,7 +36,6 @@ class Menu extends State<StatefulMenu> {
 
   void _initListOfCommands() async {
     menuEntries.clear();
-    List commands = await readCommand();
 
     for (var command in commands) {
       if (searchedTerm == "" || command.contains(searchedTerm)) {
@@ -42,12 +47,12 @@ class Menu extends State<StatefulMenu> {
         }
         setState(() {
           menuEntries.add(Container(
-            margin: EdgeInsets.fromLTRB(16.0, 2.5, 16.0, 2.5),
+            margin: const EdgeInsets.fromLTRB(16.0, 2.5, 16.0, 2.5),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
                 border: Border.all(
-                  color: Color.fromARGB(125, 0, 0, 0),
+                  color: const Color.fromARGB(125, 0, 0, 0),
                   width: 1,
                 )),
             child: TextButton(

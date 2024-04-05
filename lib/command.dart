@@ -8,6 +8,7 @@ class Command extends StatefulWidget {
   //default command
   String comm = "ls.json";
 
+  @override
   Command(String commandName) {
     if (!commandName.contains(".json") && commandName != "random") {
       commandName += ".json";
@@ -52,16 +53,18 @@ class CommandPage extends State<Command> {
 
   @override
   CommandPage(String commandName) {
-    if (commandName == "random")
-      _randomCommand();
-    else
+    if (commandName == "random"){
+       _randomCommand();
+    }
+    else{
       _loadCommand(commandName);
+    }
   }
 
   void _randomCommand() async {
     List commands = await readCommand();
 
-    final randomGen = new Random();
+    final randomGen =  Random();
 
     var element = commands[randomGen.nextInt(commands.length)];
 

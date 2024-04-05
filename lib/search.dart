@@ -26,10 +26,11 @@ class Search extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
+      resizeToAvoidBottomInset: false,
+      body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
-        onSubmitted: (String storedText) {
+        onChanged: (String storedText) {
           value = storedText;
           Menu.searchedTerm = storedText;
           associatedMenu.refreshCommands();
@@ -39,8 +40,8 @@ class Search extends State<SearchWidget> {
         cursorColor: Colors.deepPurple,
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
-          labelText: 'Search command',
-          contentPadding: EdgeInsets.all(20.0),
+          contentPadding: EdgeInsets.all(16.0),
+          labelText: 'Search command'
         ),
       ),
     ));
