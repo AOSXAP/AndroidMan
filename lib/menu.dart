@@ -19,60 +19,74 @@ class Menu extends State<StatefulMenu> {
   List<Widget> menuEntries = [];
   static String searchedTerm = "";
   List<dynamic> commands = [];
+  Map<String, Widget> commandWidgetMap = {};
 
   @override
   Menu() {
-    _readInitialCommands();
-    _initListOfCommands();
+    _initAllMenuEntriesWidgets();
   }
 
-  void _readInitialCommands()async {
-    commands = await readCommand();
-  }
+  void _initAllMenuEntriesWidgets() async {
+    Map<String, Widget> widgetMap = {};
 
-  void refreshCommands() {
-    _initListOfCommands();
-  }
+    var commandList = await readCommand();
 
-  void _initListOfCommands() async {
-    menuEntries.clear();
+    for (var command in commandList) {
+      Command initCommand = Command(command);
+      String description = await Command.listDescription(command);
 
-    for (var command in commands) {
-      if (searchedTerm == "" || command.contains(searchedTerm)) {
-        Command initCommand = Command(command);
-        String description = await Command.listDescription(command);
-
-        if (description.length >= 200) {
-          description = description.substring(0, 196) + " ...";
-        }
-        setState(() {
-          menuEntries.add(Container(
-            margin: const EdgeInsets.fromLTRB(16.0, 2.5, 16.0, 2.5),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
-                border: Border.all(
-                  color: const Color.fromARGB(125, 0, 0, 0),
-                  width: 1,
-                )),
-            child: TextButton(
-              child: GFListTile(
-                titleText: command.replaceAll(".json", ""),
-                subTitleText: description,
-                listItemTextColor: Colors.deepPurple,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => initCommand,
-                  ),
-                );
-              },
-            ),
-          ));
-        });
+      if (description.length >= 200) {
+        description = description.substring(0, 196) + " ...";
       }
+
+      widgetMap.addAll({
+        command.replaceAll(".json", ""): Container(
+          margin: const EdgeInsets.fromLTRB(16.0, 2.5, 16.0, 2.5),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color: const Color.fromARGB(125, 0, 0, 0),
+                width: 1,
+              )),
+          child: TextButton(
+            child: GFListTile(
+              titleText: command.replaceAll(".json", ""),
+              subTitleText: description,
+              focusColor: Colors.white,
+              listItemTextColor: Colors.deepPurple
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => initCommand,
+                ),
+              );
+            },
+          ),
+        )
+      });
     }
+
+    setState(() {
+      commandWidgetMap = widgetMap;
+    });
+  }
+
+  void initListOfCommands() async {
+    menuEntries.clear();
+    List<Widget> widgets = [];
+
+    commandWidgetMap.forEach((key, value) {
+      if(key.contains(searchedTerm)){
+        widgets.add(value);
+      }
+    });
+
+    setState(() {
+      menuEntries = widgets;
+    });
+
   }
 
   @override

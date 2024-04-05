@@ -30,10 +30,10 @@ class Search extends State<SearchWidget> {
       body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
-        onChanged: (String storedText) {
+        onSubmitted: (String storedText) {
           value = storedText;
           Menu.searchedTerm = storedText;
-          associatedMenu.refreshCommands();
+          associatedMenu.initListOfCommands();
           return;
         },
         style: const TextStyle(color: Colors.deepPurple),
