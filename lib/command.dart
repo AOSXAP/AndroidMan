@@ -123,7 +123,7 @@ class CommandPage extends State<Command> {
       for (int j = 0; j < _commandParagraphs[i].length; j++) {
         commandParagraphs.add(Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-            child: Text(_commandParagraphs[i][j],
+            child: SelectableText(_commandParagraphs[i][j],
                 style: const TextStyle(
                   color: Colors.black,
                 ))));
