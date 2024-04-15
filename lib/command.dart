@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'utils/readCommands.dart';
+import 'package:flutter_test/flutter_test.dart';
 import "dart:math";
 
 class Command extends StatefulWidget {
@@ -50,6 +51,8 @@ class CommandPage extends State<Command> {
   List _commandParagraphs = [[]]; //array of file paragraphs
   List _commandSections = ['']; //array of file sections
   static int index = 0;
+
+  Map<GlobalKey,String> searchUtility = {}; //used for linking keys with Strings
 
   @override
   CommandPage(String commandName) {
@@ -121,8 +124,12 @@ class CommandPage extends State<Command> {
       commandParagraphs = [];
       //for each paragraph in current section
       for (int j = 0; j < _commandParagraphs[i].length; j++) {
+        GlobalKey paragraphKey =  new GlobalKey();
+        searchUtility[paragraphKey] = _commandParagraphs[i][j];
+
         commandParagraphs.add(Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+            key: paragraphKey,
             child: SelectableText(_commandParagraphs[i][j],
                 style: const TextStyle(
                   color: Colors.black,
@@ -139,7 +146,7 @@ class CommandPage extends State<Command> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _commandSections[i + 1],
+                      _commandSections[i + 1], //Command Section Name
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                           fontSize: 20,
@@ -156,6 +163,8 @@ class CommandPage extends State<Command> {
 
   @override
   Widget build(BuildContext context) {
+    final dataKey = new GlobalKey();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTitle,
@@ -168,7 +177,30 @@ class CommandPage extends State<Command> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[..._renderCommand()],
+          children: [
+            const SizedBox(height: 30),
+            FractionallySizedBox(
+              widthFactor: 0.65, // between 0 and 1
+              child: SizedBox(
+                  height: 100,
+                  child: TextField(
+                    onSubmitted: (String storedText) {
+                      for(MapEntry<GlobalKey,String> item in searchUtility.entries){
+                        if(item.value.contains(storedText)){
+                          Scrollable.ensureVisible(item.key.currentContext!);
+                          break;
+                        }
+                      }
+                    },
+                    style:  TextStyle(color: Colors.deepPurple),
+                    cursorColor: Colors.deepPurple,
+                    decoration:  InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.all(6.0),
+                        labelText: 'Search'
+                    ),
+              ))),
+            ..._renderCommand()],
         ),
       ),
     );
