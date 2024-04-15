@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'menu.dart';
+import '../menu/menu.dart';
 
+//ignore: must_be_immutable
 class SearchWidget extends StatefulWidget {
   late Menu currentMenu;
 
@@ -15,7 +15,9 @@ class SearchWidget extends StatefulWidget {
 }
 
 class Search extends State<SearchWidget> {
-  static String value = "";
+  /// Description: Search widget
+
+  /// Menu in which the search will be performed
   late Menu associatedMenu;
 
   @override
@@ -31,9 +33,11 @@ class Search extends State<SearchWidget> {
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         onSubmitted: (String storedText) {
-          value = storedText;
+          /// Update static attribute of menu
           Menu.searchedTerm = storedText;
-          associatedMenu.initListOfCommands();
+
+          /// refresh menu and perform search
+          associatedMenu.reloadMenu();
           return;
         },
         style: const TextStyle(color: Colors.deepPurple),
@@ -47,5 +51,3 @@ class Search extends State<SearchWidget> {
     ));
   }
 }
-
-// appBar: GFAppBar(searchBar: true, title: const Text("AndroidMan")));

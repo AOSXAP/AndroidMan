@@ -1,42 +1,51 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 
 Future<void> dialogBuilder(BuildContext context, List<String> textToDisplay, String searchedTerm) {
+  /// Description: returns a popup Dialog that displays all the paragraphs that contain searchedTerm
+  /// Input: BuildContext, List<String>, String
+  /// Output: Future<void>
+
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
       List<Widget> widgetList = [];
 
       if(textToDisplay.isEmpty){
+        /// searchedTerm wasn't found anywhere
         widgetList.add(const Text("Searched term not found"));
       }
       else{
+        /// foreach paragraph (in which searchedTerm was found)
         for(String extractedText in textToDisplay) {
           List<TextSpan> textSpans = [];
 
+          /// foreach word
           for (String word in extractedText.split(" ")) {
+            ///if word matches/contains searchedTerm
             if (word.trim().contains(searchedTerm.trim())) {
+              ///display decorated word
               textSpans.add(
                 TextSpan(
-                  text: word + " ",
+                  text: '$word ',
                   style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
                 ),
               );
             }
+            /// else display undecorated word
             else {
               textSpans.add(
                 TextSpan(
-                  text: word + " ",
+                  text: '$word ',
                 ),
               );
             }
           }
+          /// build final list of TextSpans
           widgetList.add(Text.rich(TextSpan(children: <TextSpan>[...textSpans])));
         }
       }
 
+      ///return Popup Dialog
       return AlertDialog(
         content: SingleChildScrollView(
           child: Column(

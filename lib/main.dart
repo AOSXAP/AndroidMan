@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/menu.dart';
+import 'package:flutter_application_1/screens/menu/menu.dart';
 import 'utils/readCommands.dart';
 
 void main() => runApp(const MyApp());
@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
     MaterialApp coreApp = MaterialApp(
         title: _title,
         theme: ThemeData(
-          // useMaterial3: false,
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
         ),
