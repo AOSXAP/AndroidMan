@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'utils/popup.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'utils/readCommands.dart';
@@ -164,6 +166,9 @@ class CommandPage extends State<Command> {
   @override
   Widget build(BuildContext context) {
     final dataKey = new GlobalKey();
+    String searchedTerm = "";
+    int currentKey = 0;
+    List<GlobalKey> extractedKeys = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -176,31 +181,35 @@ class CommandPage extends State<Command> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 30),
             FractionallySizedBox(
-              widthFactor: 0.65, // between 0 and 1
+              widthFactor: 0.85, // between 0 and 1
               child: SizedBox(
-                  height: 100,
+                  height: 80,
                   child: TextField(
                     onSubmitted: (String storedText) {
-                      for(MapEntry<GlobalKey,String> item in searchUtility.entries){
-                        if(item.value.contains(storedText)){
-                          Scrollable.ensureVisible(item.key.currentContext!);
-                          break;
+                      List<String> collectedText = [];
+
+                      for (MapEntry<GlobalKey, String> item in searchUtility.entries) {
+                        if (item.value.contains(storedText)) {
+                          collectedText.add(item.value);
                         }
                       }
+
+                      dialogBuilder(context,collectedText,storedText);
                     },
-                    style:  TextStyle(color: Colors.deepPurple),
+                    onEditingComplete: () {},
+                    style:  const TextStyle(color: Colors.deepPurple),
                     cursorColor: Colors.deepPurple,
-                    decoration:  InputDecoration(
+                    decoration:  const InputDecoration(
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.all(6.0),
                         labelText: 'Search'
                     ),
               ))),
-            ..._renderCommand()],
+                ..._renderCommand()],
         ),
       ),
     );

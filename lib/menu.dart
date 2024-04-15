@@ -31,9 +31,16 @@ class Menu extends State<StatefulMenu> {
 
     var commandList = await readCommand();
 
+    //add first command - random command
+    commandList = ["random", ...commandList];
+
     for (var command in commandList) {
       Command initCommand = Command(command);
-      String description = await Command.listDescription(command);
+      String description = "random command";
+
+      if(command != "random") {
+        description = await Command.listDescription(command);
+      }
 
       if (description.length >= 200) {
         description = description.substring(0, 196) + " ...";
