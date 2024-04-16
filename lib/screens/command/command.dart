@@ -7,7 +7,8 @@ import 'search_popup.dart';
 //ignore: must_be_immutable
 class Command extends StatefulWidget {
   /// default command
-  String command = "ls.json";
+  String _commandName = "ls.json";
+  String get name => _commandName;
 
   @override
   Command(String commandName, {super.key}) {
@@ -16,7 +17,7 @@ class Command extends StatefulWidget {
       commandName += ".json";
     }
 
-    command = commandName;
+    _commandName = commandName;
   }
 
   static Future<String> listDescription(String command) async {
@@ -28,7 +29,7 @@ class Command extends StatefulWidget {
   }
 
   @override
-  State<Command> createState() => CommandPage(command);
+  State<Command> createState() => CommandPage(_commandName);
 }
 
 class CommandPage extends State<Command> {
@@ -64,7 +65,7 @@ class CommandPage extends State<Command> {
     /// Output: void
 
     /// reads all commands
-    List commands = await readCommand();
+    List commands = await getAllAvailableCommands();
 
     /// generate a random int between 0 and commands.length
     final intGenerator = Random();

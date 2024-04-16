@@ -7,7 +7,7 @@ class Logic{
     /// Description: This function returns the description of a given command
     /// Input: String
     /// Output: Future <String>
-    
+
     String fileName = command;
 
     /// load command from json file
@@ -20,7 +20,7 @@ class Logic{
     if (jsonCommand.isNotEmpty) {
       commandMap = jsonDecode(jsonCommand) as Map<String, dynamic>;
     }
-    
+
     fileName = fileName.replaceAll(".json", "");
 
     /// if command json file contains description, return it
@@ -29,7 +29,7 @@ class Logic{
         return commandMap[fileName]["DESCRIPTION"][0].toString();
       }
     }
-    
+
     /// return empty string if description not found
     return "";
   }
@@ -38,13 +38,13 @@ class Logic{
     /// Description: Returns Name of command, list of paragraphs and list of Sections
     /// Input: String
     /// Output: Future <List> (List of lists)
-    
+
     //https://docs.flutter.dev/ui/assets/assets-and-images#asset-bundling
-    
+
     /// a list containing lists of Strings
     /// each section has a coresponding list of paragraphs
     List loadParagraphs = [[]];
-    
+
     /// a list containing all sections of a command
     List loadSections = [''];
 

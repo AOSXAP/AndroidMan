@@ -1,30 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-Future<List> readCommand() async {
-  // https://docs.flutter.dev/ui/assets/assets-and-images#asset-bundling
+Future<List<String>> getAllAvailableCommands() async {
+  List<String> availableCommands = [];
 
-  /// will store all commands names after reading the info from a file
-  List allCommands = [];
-
-  /// read all stored commands(~300) from json file
   const String fileName = "assets/commands.json";
-
-  final String jsonFileCommands = await rootBundle.loadString(fileName);
-
+  final String jsonData = await rootBundle.loadString(fileName);
   var jsonMap = <String, dynamic>{};
 
-  /// decode json file and store in map
-  if (jsonFileCommands.isNotEmpty) {
-    jsonMap = jsonDecode(jsonFileCommands) as Map<String, dynamic>;
+  if(jsonData.isEmpty) return availableCommands;
+
+  jsonMap = jsonDecode(jsonData) as Map<String, dynamic>;
+  for (String commandName in jsonMap["commands"]) {
+    availableCommands.add(commandName);
   }
 
-  /// adds each command to the initial/return list
-  if (jsonFileCommands.isNotEmpty) {
-      for (var commandName in jsonMap["commands"]) {
-        allCommands.add(commandName);
-      }
-  }
-
-  return allCommands;
+  return availableCommands;
 }

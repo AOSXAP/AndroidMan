@@ -37,7 +37,7 @@ class Search extends State<SearchWidget> {
           Menu.searchedTerm = storedText;
 
           /// refresh menu and perform search
-          associatedMenu.reloadMenu();
+          associatedMenu.showMatchedCommands();
           return;
         },
         style: const TextStyle(color: Colors.deepPurple),

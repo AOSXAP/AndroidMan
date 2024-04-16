@@ -28,10 +28,10 @@ class Menu extends State<StatefulMenu> {
     ///Output: void
 
     /// read all commands
-    var commandList = await readCommand();
+    List<String> commandList = await getAllAvailableCommands();
 
     /// map commandName - Widget
-    Map<String, Widget> widgetMap = await Logic.loadData(context, commandList);
+    Map<String, Widget> widgetMap = await Logic.loadCommandsFromMemory(context, commandList);
 
 
     setState(() {
@@ -40,13 +40,13 @@ class Menu extends State<StatefulMenu> {
     });
   }
 
-  void reloadMenu(){
+  void showMatchedCommands(){
     ///Description: reload menu and reset entries
     ///Input: void
     ///Output: void
-
+    menuEntries.clear();
     setState(() {
-      menuEntries = Logic.reloadMenu(menuEntries,commandWidgetMap,searchedTerm);
+      menuEntries = Logic.getMatchedCommands(commandWidgetMap,searchedTerm);
     });
   }
 
