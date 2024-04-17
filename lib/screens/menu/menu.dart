@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/readCommands.dart';
 import "../search/search.dart";
-import '../../logic/command/menu_logic.dart';
-
+import '../../logic/command/menu_handler.dart';
 
 class StatefulMenu extends StatefulWidget {
   @override
@@ -31,8 +30,7 @@ class Menu extends State<StatefulMenu> {
     List<String> commandList = await getAllAvailableCommands();
 
     /// map commandName - Widget
-    Map<String, Widget> widgetMap = await Logic.loadCommandsFromMemory(context, commandList);
-
+    Map<String, Widget> widgetMap = await MenuHandler.loadCommandsFromMemory(context, commandList);
 
     setState(() {
       ///update global map
@@ -40,13 +38,13 @@ class Menu extends State<StatefulMenu> {
     });
   }
 
-  void showMatchedCommands(){
+  void showMatchedCommands() {
     ///Description: reload menu and reset entries
     ///Input: void
     ///Output: void
     menuEntries.clear();
     setState(() {
-      menuEntries = Logic.getMatchedCommands(commandWidgetMap,searchedTerm);
+      menuEntries = MenuHandler.getMatchedCommands(commandWidgetMap, searchedTerm);
     });
   }
 
