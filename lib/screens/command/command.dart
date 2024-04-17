@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/logic/command/string_handler.dart';
 import '../../utils/readCommands.dart';
 import "dart:math";
-import '../../logic/command/command_logic.dart';
+import '../../logic/command/command_handler.dart';
 import 'search_popup.dart';
 
 //ignore: must_be_immutable
 class Command extends StatefulWidget {
   /// default command
-  String _commandName = "ls.json";
+  String _commandName = "ls";
   String get name => _commandName;
 
   @override
   Command(String commandName, {super.key}) {
-    /// adding .json to commandName for easier handling afterwards
-    if (!commandName.contains(".json") && commandName != "random") {
-      commandName += ".json";
-    }
-
     _commandName = commandName;
   }
 
   static Future<String> listDescription(String command) async {
-    /// Description: This function returns the description of a given command
-    /// Input: String
-    /// Output: Future <String>
-
-    return Logic.getCommandDescription(command);
+    return CommandHandler.getCommandDescription(command);
   }
 
   @override
@@ -35,44 +27,31 @@ class Command extends StatefulWidget {
 class CommandPage extends State<Command> {
   static String pageTitle = "Command";
 
-  /// list of command paragraphs
-  List _commandParagraphs = [[]];
+  List _commandSections = ['no_section'];
+  List _commandParagraphs = [
+    ['empty paragraph']
+  ];
 
-  /// list of file sections
-  List _commandSections = [''];
-
-  /// index of sections
   static int index = 0;
 
   /// search utility for storing paragraphs and keys
-  Map<GlobalKey,String> searchUtility = {};
+  Map<GlobalKey, String> searchUtility = {};
 
   @override
   CommandPage(String commandName) {
-    if (commandName == "random"){
+    if (commandName == "random") {
       /// load a random command
       _randomCommand();
-    }
-    else{
+    } else {
       /// load a given command
       _loadCommand(commandName);
     }
   }
 
   void _randomCommand() async {
-    /// Description: loads the content of a random command
-    /// Input: void
-    /// Output: void
-
-    /// reads all commands
     List commands = await getAllAvailableCommands();
-
-    /// generate a random int between 0 and commands.length
-    final intGenerator = Random();
-
-    var element = commands[intGenerator.nextInt(commands.length)];
-
-    /// load the selected command
+    final int randomListIndex = Random().nextInt(commands.length);
+    String element = StringHandler.removeExtensionFromFileName(commands[randomListIndex], '.json');
     _loadCommand(element);
   }
 
@@ -81,7 +60,7 @@ class CommandPage extends State<Command> {
     /// Input: String
     /// Output: void
 
-    var loadedCommand = await Logic.loadCommand(commandName);
+    var loadedCommand = await CommandHandler.loadCommand(commandName);
 
     /// load resources
     setState(() {
@@ -95,11 +74,7 @@ class CommandPage extends State<Command> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(pageTitle,
-            style: const TextStyle(
-                fontSize: 30,
-                color: Colors.deepPurple,
-                fontWeight: FontWeight.bold)),
+        title: Text(pageTitle, style: const TextStyle(fontSize: 30, color: Colors.deepPurple, fontWeight: FontWeight.bold)),
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       body: SingleChildScrollView(
@@ -107,10 +82,12 @@ class CommandPage extends State<Command> {
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 30),
+
             ///renders search widget
-            popupSearchWidget(context,searchUtility),
+            popupSearchWidget(context, searchUtility),
+
             ///renders command body widget
-            ...Logic.renderCommand(_commandSections,_commandParagraphs,searchUtility)
+            ...CommandHandler.renderCommand(_commandSections, _commandParagraphs, searchUtility)
           ],
         ),
       ),
