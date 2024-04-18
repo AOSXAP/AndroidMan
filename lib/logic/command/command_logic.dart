@@ -103,7 +103,7 @@ class Logic{
       /// foreach paragraph in current section
       for (int j = 0; j < commandParagraphs[i].length; j++) {
         ///generate key
-        GlobalKey paragraphKey =  new GlobalKey();
+        GlobalKey paragraphKey =  GlobalKey();
 
         ///add paragraph to search utility
         searchUtility[paragraphKey] = commandParagraphs[i][j];

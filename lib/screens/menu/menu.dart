@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/menu/theme_widget.dart';
 import 'package:flutter_application_1/utils/read_commands.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
-import '../../theme/theme_handler.dart';
 import "search/search.dart";
 import '../../logic/command/menu_logic.dart';
 
