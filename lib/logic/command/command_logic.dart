@@ -86,7 +86,7 @@ class Logic{
     return [fileName, loadSections, loadParagraphs];
   }
 
-  static List<Widget> renderCommand(List commandSections, List commandParagraphs, Map<GlobalKey,String> searchUtility) {
+  static List<Widget> renderCommand(List commandSections, List commandParagraphs, Map<GlobalKey,String> searchUtility, BuildContext context) {
     /// Description: Renders Command after it's content was loaded
     /// Input: List,List,Map<GlobalKey,String>
     /// Output: List<Widget>
@@ -112,8 +112,8 @@ class Logic{
             padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
             key: paragraphKey,
             child: SelectableText(commandParagraphs[i][j],
-                style: const TextStyle(
-                  color: Colors.black,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyLarge!.color,
                 ))));
       }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../menu/menu.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
+import '../menu.dart';
 
 //ignore: must_be_immutable
 class SearchWidget extends StatefulWidget {
@@ -35,17 +36,16 @@ class Search extends State<SearchWidget> {
         onSubmitted: (String storedText) {
           /// Update static attribute of menu
           Menu.searchedTerm = storedText;
-
           /// refresh menu and perform search
           associatedMenu.reloadMenu();
           return;
         },
-        style: const TextStyle(color: Colors.deepPurple),
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+          color: ThemeDefinition.accentColor
+        ),
         cursorColor: Colors.deepPurple,
         decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.all(16.0),
-          labelText: 'Search command'
+          labelText: "Search Command"
         ),
       ),
     ));

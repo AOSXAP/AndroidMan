@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/readCommands.dart';
+import '../../utils/read_commands.dart';
 import "dart:math";
 import '../../logic/command/command_logic.dart';
 import 'search_popup.dart';
@@ -95,11 +95,7 @@ class CommandPage extends State<Command> {
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTitle,
-            style: const TextStyle(
-                fontSize: 30,
-                color: Colors.deepPurple,
-                fontWeight: FontWeight.bold)),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+            style: Theme.of(context).textTheme.displayMedium),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -109,7 +105,7 @@ class CommandPage extends State<Command> {
             ///renders search widget
             popupSearchWidget(context,searchUtility),
             ///renders command body widget
-            ...Logic.renderCommand(_commandSections,_commandParagraphs,searchUtility)
+            ...Logic.renderCommand(_commandSections,_commandParagraphs,searchUtility,context)
           ],
         ),
       ),

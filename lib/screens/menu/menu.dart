@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/utils/readCommands.dart';
-import "../search/search.dart";
+import 'package:flutter_application_1/main.dart';
+import 'package:flutter_application_1/screens/menu/theme_widget.dart';
+import 'package:flutter_application_1/utils/read_commands.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
+import '../../theme/theme_handler.dart';
+import "search/search.dart";
 import '../../logic/command/menu_logic.dart';
 
-
+/// This widget displays a menu with all commands and a widget
 class StatefulMenu extends StatefulWidget {
   @override
   const StatefulMenu({super.key});
@@ -24,15 +28,13 @@ class Menu extends State<StatefulMenu> {
 
   void initMenu() async {
     ///Description: init Menu
-    ///Input: void
-    ///Output: void
 
     /// read all commands
     var commandList = await readCommand();
 
     /// map commandName - Widget
     Map<String, Widget> widgetMap = await Logic.loadData(context, commandList);
-
+    menuEntries = Logic.reloadMenu(menuEntries, widgetMap, searchedTerm);
 
     setState(() {
       ///update global map
@@ -40,22 +42,24 @@ class Menu extends State<StatefulMenu> {
     });
   }
 
-  void reloadMenu(){
+  void reloadMenu() {
     ///Description: reload menu and reset entries
-    ///Input: void
-    ///Output: void
-
     setState(() {
-      menuEntries = Logic.reloadMenu(menuEntries,commandWidgetMap,searchedTerm);
+      menuEntries =
+          Logic.reloadMenu(menuEntries, commandWidgetMap, searchedTerm);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      SizedBox(height: 80, child: SearchWidget(this)),
-      ...menuEntries,
-    ]));
+    return Container(
+        color: Theme.of(context).cardColor,
+        child: SingleChildScrollView(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          SizedBox(height: 80, child: SearchWidget(this)),
+          const SizedBox(height: 80, child: ThemeWidget()),
+          ...menuEntries,
+        ])));
   }
 }

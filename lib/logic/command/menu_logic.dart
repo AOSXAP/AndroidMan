@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
 import '../../screens/command/command.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -51,10 +52,10 @@ class Logic{
       ///add command to widgetMap
       widgetMap.addAll({
         command.replaceAll(".json", ""): Container(
-          margin: const EdgeInsets.fromLTRB(16.0, 2.5, 16.0, 2.5),
+          margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 2.5),
           decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(5),
+              color: Theme.of(context).cardColor,
               border: Border.all(
                 color: const Color.fromARGB(125, 0, 0, 0),
                 width: 1,
@@ -63,8 +64,7 @@ class Logic{
             child: GFListTile(
                 titleText: command.replaceAll(".json", ""),
                 subTitleText: description,
-                focusColor: Colors.white,
-                listItemTextColor: Colors.deepPurple
+                listItemTextColor: ThemeDefinition.accentColor,
             ),
             onPressed: () {
               Navigator.of(context).push(

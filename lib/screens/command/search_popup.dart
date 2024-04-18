@@ -7,7 +7,7 @@ Widget popupSearchWidget(BuildContext context, Map<GlobalKey,String> searchUtili
   /// Output: Widget
 
   return FractionallySizedBox(
-      widthFactor: 0.85, // between 0 and 1
+      widthFactor: 0.9, // between 0 and 1
       child: SizedBox(
           height: 80,
           child: TextField(
@@ -27,10 +27,9 @@ Widget popupSearchWidget(BuildContext context, Map<GlobalKey,String> searchUtili
               dialogBuilder(context, collectedText, searchedTerm);
             },
             onEditingComplete: () {}, /// keep keyboard on
-            style: const TextStyle(color: Colors.deepPurple),
+            style: Theme.of(context).textTheme.bodyLarge,
             cursorColor: Colors.deepPurple,
             decoration: const InputDecoration(
-                border: OutlineInputBorder(),
                 contentPadding: EdgeInsets.all(6.0),
                 labelText: 'Search'),
           )
