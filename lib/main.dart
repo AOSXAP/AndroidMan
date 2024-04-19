@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/menu/menu.dart';
-import 'utils/read_commands.dart';
-import 'theme/theme_definition.dart';
-import 'theme/theme_handler.dart';
 import 'screens/menu/future_menu.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
