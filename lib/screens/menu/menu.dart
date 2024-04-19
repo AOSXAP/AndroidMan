@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/menu/theme_widget.dart';
 import 'package:flutter_application_1/utils/read_commands.dart';
 import "search/search.dart";
-import '../../logic/command/menu_logic.dart';
+import '../../logic/menu/menu_logic.dart';
 
 /// This widget displays a menu with all commands and a widget
 class StatefulMenu extends StatefulWidget {
@@ -54,8 +54,10 @@ class Menu extends State<StatefulMenu> {
         child: SingleChildScrollView(
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(height: 80, child: SearchWidget(this)),
-          const SizedBox(height: 80, child: ThemeWidget()),
+                  Row(children: [
+                    SizedBox(height: 80, width: MediaQuery.of(context).size.width * 0.85, child: SearchWidget(this)),
+                    SizedBox(height: 80, width: MediaQuery.of(context).size.width * 0.15, child: const ThemeWidget()),
+                  ]),
           ...menuEntries,
         ])));
   }

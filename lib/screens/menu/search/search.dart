@@ -29,6 +29,7 @@ class Search extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       resizeToAvoidBottomInset: false,
       body: Padding(
       padding: const EdgeInsets.all(16.0),
@@ -41,11 +42,13 @@ class Search extends State<SearchWidget> {
           return;
         },
         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-          color: ThemeDefinition.accentColor
+          color: ThemeDefinition.accentColor,
         ),
         cursorColor: Colors.deepPurple,
-        decoration: const InputDecoration(
-          labelText: "Search Command"
+        decoration: InputDecoration(
+          labelText: "Search Command",
+          fillColor: Theme.of(context).cardColor,
+          filled: true
         ),
       ),
     ));

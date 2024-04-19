@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../theme/theme_definition.dart';
 import '../../utils/read_commands.dart';
 import "dart:math";
 import '../../logic/command/command_logic.dart';
@@ -95,7 +96,10 @@ class CommandPage extends State<Command> {
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTitle,
-            style: Theme.of(context).textTheme.displayMedium),
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+              color: ThemeDefinition.accentColor
+            )
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

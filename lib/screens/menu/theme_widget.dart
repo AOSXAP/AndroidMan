@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import '../../theme/theme_handler.dart';
 
@@ -12,6 +13,24 @@ class ThemeWidget extends StatefulWidget {
 
 class ThemeChanger extends State<ThemeWidget> {
   /// Description: Change Theme widget
+  static double iconSize = 24.0;
+
+  Icon setIcon(){
+    if(ThemeHandler.selectedTheme == "dark"){
+      return Icon(
+        Icons.wb_sunny_outlined,
+        color: ThemeDefinition.accentColor,
+        size: iconSize,
+      );
+    }
+
+    return Icon(
+      Icons.nights_stay_rounded,
+      color: ThemeDefinition.accentColor,
+      size: iconSize,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextButton(onPressed: (){
@@ -24,7 +43,7 @@ class ThemeChanger extends State<ThemeWidget> {
       ///restart app on theme change
       Phoenix.rebirth(context);
     },
-      child: const Text("change Theme")
+      child: setIcon()
     );
   }
 }

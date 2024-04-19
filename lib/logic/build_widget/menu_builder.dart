@@ -1,32 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/theme/theme_definition.dart';
+import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import '../../screens/command/command.dart';
-import 'package:getwidget/getwidget.dart';
+import '../../theme/theme_definition.dart';
 
-class Logic{
-  static List<Widget> reloadMenu(List<Widget> menuEntries, Map<String, Widget> commandWidgetMap, String searchedTerm ){
-    /// reset actual menu
-    menuEntries.clear();
-
-    /// create new list of widgets
-    List<Widget> widgets = [];
-
-    /// foreach widget in all loaded widgets
-    commandWidgetMap.forEach((key, value) {
-      /// if name of widget contains searchedTerm
-      if(key.contains(searchedTerm)){
-        widgets.add(value);
-      }
-    });
-
-    /// reload Widgets
-    return widgets;
-  }
-
-  static Future<Map<String, Widget>> loadData(var context, var commandList) async {
-    ///Description: Load all commands and data
-    ///Input: Context, List
-    ///Output: Map<String, Widget>
+class BuildMenu{
+  static Future<Map<String, Widget>> buildCommandsWidgets(BuildContext context, List<dynamic> commandList) async {
+    ///Description: Build all commands widget
 
     /// map commandName - Widget
     Map<String, Widget> widgetMap = {};
@@ -62,9 +41,9 @@ class Logic{
               )),
           child: TextButton(
             child: GFListTile(
-                titleText: command.replaceAll(".json", ""),
-                subTitleText: description,
-                listItemTextColor: ThemeDefinition.accentColor,
+              titleText: command.replaceAll(".json", ""),
+              subTitleText: description,
+              listItemTextColor: ThemeDefinition.accentColor,
             ),
             onPressed: () {
               Navigator.of(context).push(

@@ -5,7 +5,6 @@ import '../../theme/theme_definition.dart';
 import '../../theme/theme_handler.dart';
 
 /// This widget renders the entire menu section (including loading and setting theme)
-
 class SectionMenu extends StatelessWidget {
   const SectionMenu({super.key});
   static const String _title = 'Command to run';
