@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/menu/menu.dart';
-import 'utils/readCommands.dart';
+import 'screens/menu/future_menu.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  static Key appKey = UniqueKey();
+
   const MyApp({super.key});
 
-  static const String _title = 'Command to run';
-
+  void refresh(BuildContext context){
+    build(context);
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    readCommand();
-
-    MaterialApp coreApp = MaterialApp(
-        title: _title,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        ),
-        home: const StatefulMenu());
-
-    return Container(
-      color: Colors.white,
-      child: SafeArea(child: coreApp),
+    return Phoenix(
+      child:const SectionMenu()
     );
   }
 }

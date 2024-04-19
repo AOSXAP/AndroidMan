@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_application_1/logic/build_widget/command_builder.dart';
 import 'dart:convert';
+
+import 'package:flutter_application_1/theme/theme_definition.dart';
 
 class Logic{
   static Future<String> getCommandDescription(String command) async {
@@ -86,59 +89,8 @@ class Logic{
     return [fileName, loadSections, loadParagraphs];
   }
 
-  static List<Widget> renderCommand(List commandSections, List commandParagraphs, Map<GlobalKey,String> searchUtility) {
+  static List<Widget> renderCommand(List commandSections, List commandParagraphs, Map<GlobalKey,String> searchUtility, BuildContext context) {
     /// Description: Renders Command after it's content was loaded
-    /// Input: List,List,Map<GlobalKey,String>
-    /// Output: List<Widget>
-
-    /// Widget Body
-    List<Widget> renderBody = [];
-
-    /// child of Widget,stores paragraphs
-    List<Widget> renderChild = [];
-
-    /// foreach section
-    for (int i = 0; i < commandSections.length - 1; i++) {
-      renderChild = [];
-      /// foreach paragraph in current section
-      for (int j = 0; j < commandParagraphs[i].length; j++) {
-        ///generate key
-        GlobalKey paragraphKey =  new GlobalKey();
-
-        ///add paragraph to search utility
-        searchUtility[paragraphKey] = commandParagraphs[i][j];
-
-        renderChild.add(Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
-            key: paragraphKey,
-            child: SelectableText(commandParagraphs[i][j],
-                style: const TextStyle(
-                  color: Colors.black,
-                ))));
-      }
-
-      /// build render Widget
-      renderBody.add(Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          child: Container(
-              alignment: Alignment.topLeft,
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      commandSections[i + 1], /// Command Section Name
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.deepPurple,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    ...renderChild
-                  ],
-                ),
-              ))));
-    }
-    return renderBody;
+    return BuildCommand.buildWidget(commandSections, commandParagraphs, searchUtility, context);
   }
 }

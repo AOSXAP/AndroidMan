@@ -27,7 +27,9 @@ Future<void> dialogBuilder(BuildContext context, List<String> textToDisplay, Str
               textSpans.add(
                 TextSpan(
                   text: '$word ',
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    color: Theme.of(context).primaryColor
+                  ),
                 ),
               );
             }
@@ -55,7 +57,9 @@ Future<void> dialogBuilder(BuildContext context, List<String> textToDisplay, Str
         actions: <Widget>[
           TextButton(
             style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
+              textStyle: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: Theme.of(context).primaryColor
+              ),
             ),
             child: const Text('Close'),
             onPressed: () {
