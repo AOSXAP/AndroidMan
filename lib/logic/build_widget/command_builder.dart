@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/theme_definition.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
 
 class BuildCommand{
   static List<Widget> buildWidget(List commandSections, List commandParagraphs, Map<GlobalKey,String> searchUtility, BuildContext context) {

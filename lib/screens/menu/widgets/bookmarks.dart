@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/menu/widgets/search.dart';
+import 'package:getwidget/getwidget.dart';
+
 import 'package:flutter_application_1/theme/theme_definition.dart';
 import 'package:flutter_application_1/theme/theme_handler.dart';
-import '../../../logic/menu/menu_logic.dart';
-import 'package:getwidget/getwidget.dart';
-import 'menu.dart';
+import 'package:flutter_application_1/logic/menu/menu_logic.dart';
+import 'package:flutter_application_1/screens/menu/widgets/menu.dart';
 
 //ignore: must_be_immutable
 class BookmarksButtonWidget extends StatefulWidget

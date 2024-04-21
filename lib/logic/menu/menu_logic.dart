@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_1/logic/bookmark/bookmark_handler.dart';
-import '../build_widget/menu_builder.dart';
+import 'package:flutter_application_1/logic/build_widget/menu_builder.dart';
 
 class Logic{
   static List<Widget> loadSearchedTerm(List<Widget> menuEntries, Map<String, Widget> commandWidgetMap, String searchedTerm ){

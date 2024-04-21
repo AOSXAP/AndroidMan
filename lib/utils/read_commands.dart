@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-Future<List> readCommand() async {
+Future<List<String>> readCommands() async {
   // https://docs.flutter.dev/ui/assets/assets-and-images#asset-bundling
 
   /// will store all commands names after reading the info from a file
-  List allCommands = [];
+  List<String> allCommands = [];
 
   /// read all stored commands(~300) from json file
   const String fileName = "assets/commands.json";

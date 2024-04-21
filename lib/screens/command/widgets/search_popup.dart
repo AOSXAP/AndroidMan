@@ -3,8 +3,6 @@ import 'popup.dart';
 
 Widget popupSearchWidget(BuildContext context, Map<GlobalKey,String> searchUtility) {
   /// Description: returns a search widget that on submit launches a popup
-  /// Input: BuildContext, Map<GlobalKey,String>
-  /// Output: Widget
 
   return FractionallySizedBox(
       widthFactor: 1, // between 0 and 1

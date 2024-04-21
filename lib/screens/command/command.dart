@@ -1,14 +1,11 @@
-import 'dart:ffi';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/screens/command/widgets/bookmark_widget.dart';
-import '../../theme/theme_definition.dart';
-import '../../utils/read_commands.dart';
 import "dart:math";
-import '../../logic/command/command_logic.dart';
-import './widgets/search_popup.dart';
+
+import 'package:flutter_application_1/logic/command/command_logic.dart';
+import 'package:flutter_application_1/screens/command/widgets/search_popup.dart';
+import 'package:flutter_application_1/screens/command/widgets/bookmark_widget.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
+import 'package:flutter_application_1/utils/read_commands.dart';
 
 //ignore: must_be_immutable
 class Command extends StatefulWidget {
@@ -71,7 +68,7 @@ class CommandPage extends State<Command> {
     /// Description: loads the content of a random command
 
     /// reads all commands
-    List commands = await readCommand();
+    List commands = await readCommands();
 
     final intGenerator = Random();
     var element = commands[intGenerator.nextInt(commands.length)];
@@ -104,8 +101,6 @@ class CommandPage extends State<Command> {
                 ),
               );
             } else if (snapshot.hasData) {
-              final data = snapshot.data;
-
               return Scaffold(
                   appBar: AppBar(
                     title: Text(pageTitle.replaceAll(".json", ""),
