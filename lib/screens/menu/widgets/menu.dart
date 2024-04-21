@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/menu/widgets/bookmarks.dart';
 import 'package:flutter_application_1/screens/menu/widgets/theme_widget.dart';
+import 'package:flutter_application_1/screens/regex_editor/regex_editor_widget.dart';
 import 'package:flutter_application_1/theme/theme_definition.dart';
+import 'package:flutter_application_1/theme/theme_handler.dart';
 import 'package:flutter_application_1/utils/read_commands.dart';
 import 'package:getwidget/getwidget.dart';
 import "search.dart";
@@ -81,7 +83,19 @@ class Menu extends State<StatefulMenu> {
                 child: const ThemeWidget()),
           ]),
           Row(children: [
-            BookmarksButtonWidget(this)
+            BookmarksButtonWidget(this),
+            GFButton(
+              text: "Regex",
+                highlightColor: Theme.of(context).cardColor,
+                textColor: ThemeHandler.fontCol,
+                color: Theme.of(context).cardColor,
+                onPressed: (){
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const RegexEditorWidget(),
+                ),
+              );
+            })
           ]),
           ...menuEntries,
         ])));

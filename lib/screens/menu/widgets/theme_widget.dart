@@ -19,7 +19,7 @@ class ThemeChanger extends State<ThemeWidget> {
   Icon setIcon(){
     if(ThemeHandler.selectedTheme == "dark"){
       return Icon(
-        Icons.wb_sunny_outlined,
+        Icons.sunny_snowing,
         color: ThemeDefinition.accentColor,
         size: iconSize,
       );
