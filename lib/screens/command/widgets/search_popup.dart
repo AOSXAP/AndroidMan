@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './popup.dart';
+import 'popup.dart';
 
 Widget popupSearchWidget(BuildContext context, Map<GlobalKey,String> searchUtility) {
   /// Description: returns a search widget that on submit launches a popup
@@ -7,9 +7,8 @@ Widget popupSearchWidget(BuildContext context, Map<GlobalKey,String> searchUtili
   /// Output: Widget
 
   return FractionallySizedBox(
-      widthFactor: 0.9, // between 0 and 1
+      widthFactor: 1, // between 0 and 1
       child: SizedBox(
-          height: 80,
           child: TextField(
             onSubmitted: (String searchedTerm) {
               /// List of paragraphs

@@ -6,13 +6,9 @@ class AppData{
   //? == data could be null
   static SharedPreferences? data;
 
-  static void initData(){
+  static Future<void> initData() async {
     /// ensure AppData is init
-    if(AppData.data == null) {
-      AppData.readData().then((d){
-        AppData.data = d;
-      });
-    }
+      AppData.data ??= await AppData.readData();
   }
 
   static Future<SharedPreferences> readData() async{
@@ -25,6 +21,14 @@ class AppData{
 
   static Future<void> setPreference(String field, String val) async{
     await data?.setString(field, val);
+  }
+
+  static List<String>? getPreferenceList(String prefListName){
+    return data?.getStringList(prefListName);
+  }
+
+  static Future<void> setPreferenceList(String field, List<String> values) async{
+    await data?.setStringList(field, values);
   }
 
   static Future<void> removePreference(String pref) async{

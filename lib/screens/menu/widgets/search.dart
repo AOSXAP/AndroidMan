@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/theme/theme_definition.dart';
-import '../menu.dart';
+import 'menu.dart';
 
 //ignore: must_be_immutable
 class SearchWidget extends StatefulWidget {
@@ -20,6 +20,7 @@ class Search extends State<SearchWidget> {
 
   /// Menu in which the search will be performed
   late Menu associatedMenu;
+  static final TextEditingController control  = TextEditingController();
 
   @override
   Search(Menu passedMenu) {
@@ -34,6 +35,7 @@ class Search extends State<SearchWidget> {
       body: Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextField(
+        controller: control,
         onSubmitted: (String storedText) {
           /// Update static attribute of menu
           Menu.searchedTerm = storedText;

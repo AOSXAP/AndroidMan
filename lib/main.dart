@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/menu/future_menu.dart';
+import 'screens/menu/async_menu.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() => runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Phoenix(
-      child:const SectionMenu()
+      child:const AsyncMenu()
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/theme/theme_definition.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import '../../theme/theme_handler.dart';
+import '../../../theme/theme_handler.dart';
 
 //ignore: must_be_immutable
 class ThemeWidget extends StatefulWidget {
