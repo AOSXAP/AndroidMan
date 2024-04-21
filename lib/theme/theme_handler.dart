@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../logic/appdata/appdata.dart';
-import 'theme_definition.dart';
+
+import 'package:flutter_application_1/logic/appdata/appdata.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
 
 class ThemeHandler{
   static String selectedTheme = "light";

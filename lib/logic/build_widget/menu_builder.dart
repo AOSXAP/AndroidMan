@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
-import '../../screens/command/command.dart';
-import '../../theme/theme_definition.dart';
+
+import 'package:flutter_application_1/screens/command/command.dart';
+import 'package:flutter_application_1/theme/theme_definition.dart';
 
 class BuildMenu{
   static Future<Map<String, Widget>> buildCommandsWidgets(BuildContext context, List<dynamic> commandList) async {

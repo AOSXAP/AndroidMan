@@ -28,12 +28,10 @@ class Menu extends State<StatefulMenu> {
 
   void initMenu() async {
     ///Description: init Menu
-
-    /// read all commands
-    var commandList = await readCommand();
+    var commands = await readCommands();
 
     /// map commandName - Widget
-    Map<String, Widget> widgetMap = await Logic.loadData(context, commandList);
+    Map<String, Widget> widgetMap = await Logic.loadData(context, commands);
 
     menuEntries = [];
     for (var comm in widgetMap.entries) {

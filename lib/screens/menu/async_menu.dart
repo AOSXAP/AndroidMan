@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/logic/bookmark/bookmark_handler.dart';
 import 'package:flutter_application_1/screens/menu/widgets/menu.dart';
-import '../../utils/read_commands.dart';
+import '../../logic/bookmark/bookmark_handler.dart';
 import '../../theme/theme_definition.dart';
 import '../../theme/theme_handler.dart';
 
@@ -13,8 +12,7 @@ class AsyncMenu extends StatelessWidget {
   static ThemeData selectedTheme = ThemeDefinition.lightTheme;
 
   /// load async assets before displaying menu
-  static Future<ThemeData> loadAssets() async {
-    await readCommand();
+  static Future<ThemeData> loadAssets(BuildContext context) async {
     await BookmarkHandler.getBookmarks();
     return await ThemeHandler.selectCurrentTheme();
   }
@@ -47,6 +45,6 @@ class AsyncMenu extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             },
-            future: loadAssets()));
+            future: loadAssets(context)));
   }
 }

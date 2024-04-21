@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_1/theme/theme_definition.dart';
-import 'menu.dart';
+import 'package:flutter_application_1/screens/menu/widgets/menu.dart';
 
 //ignore: must_be_immutable
 class SearchWidget extends StatefulWidget {

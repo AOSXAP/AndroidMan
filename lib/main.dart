@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/menu/async_menu.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+
+import 'package:flutter_application_1/screens/menu/async_menu.dart';
 
 void main() => runApp(const MyApp());
 

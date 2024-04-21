@@ -1,4 +1,4 @@
-import '../appdata/appdata.dart';
+import 'package:flutter_application_1/logic/appdata/appdata.dart';
 
 class BookmarkHandler{
   static List<String> bookmarks = [];
