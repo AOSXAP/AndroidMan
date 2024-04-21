@@ -52,8 +52,11 @@ class BookmarkButton extends State<BookmarksButtonWidget> {
         onPressed: () {
           setState(() {
             buildButtonType();
-            if(menu != null) {
+            if(menu != null && selected) {
               menu!.updateMenuEntries(Logic.loadBookmarks(
+                  Menu.menuEntries, Menu.commandWidgetMap, Menu.searchedTerm));
+            }else{
+              menu!.updateMenuEntries(Logic.loadSearchedTerm(
                   Menu.menuEntries, Menu.commandWidgetMap, Menu.searchedTerm));
             }
           });
