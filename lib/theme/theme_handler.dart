@@ -5,6 +5,18 @@ import 'package:flutter_application_1/theme/theme_definition.dart';
 
 class ThemeHandler{
   static String selectedTheme = "light";
+  static Color fontColor = Colors.white;
+
+  static get fontCol{
+    fontColor = ThemeDefinition.accentColor;
+
+    if(ThemeHandler.selectedTheme == "dark"){
+      fontColor = Colors.white;
+    }
+
+    return fontColor;
+  }
+
 
   static Future<String> getTheme() async {
     /// Load current theme

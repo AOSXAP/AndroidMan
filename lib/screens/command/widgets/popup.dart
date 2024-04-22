@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 
 Future<void> dialogBuilder(BuildContext context, List<String> textToDisplay, String searchedTerm) {
   /// Description: returns a popup Dialog that displays all the paragraphs that contain searchedTerm
-  /// Input: BuildContext, List<String>, String
-  /// Output: Future<void>
-
   return showDialog<void>(
     context: context,
     builder: (BuildContext context) {
