@@ -49,7 +49,7 @@ class BuildMenu{
               listItemTextColor: ThemeDefinition.accentColor,
             ),
             onPressed: () {
-              Navigator.of(context).push(FastRoutes.initRoute(initCommand, Duration.zero));
+              Navigator.of(context).push(FastRoutes.initRoute(initCommand, Duration(microseconds: 300)));
             },
           ),
         )
