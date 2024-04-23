@@ -5,6 +5,7 @@ import 'package:flutter_application_1/logic/command/command_logic.dart';
 import 'package:flutter_application_1/screens/command/widgets/search_popup.dart';
 import 'package:flutter_application_1/screens/command/widgets/bookmark_widget.dart';
 import 'package:flutter_application_1/theme/theme_definition.dart';
+import 'package:flutter_application_1/theme/theme_handler.dart';
 import 'package:flutter_application_1/utils/read_commands.dart';
 
 //ignore: must_be_immutable
@@ -33,7 +34,7 @@ class Command extends StatefulWidget {
 
 class CommandPage extends State<Command> {
   String pageTitle = "Command";
-  Future<String>? renderedFuture;
+  Future? renderedFuture;
 
   /// list of command paragraphs and file sections
   List _commandParagraphs = [[]];
@@ -52,18 +53,20 @@ class CommandPage extends State<Command> {
   }
 
   Future<String> _renderCommand(String commandName) async {
+    String returnString = "";
+
     if (!commandInit) {
       commandInit = true;
       if (commandName == "random") {
         /// load a random command
-        return await _randomCommand();
+        returnString = await _randomCommand();
       } else {
         /// load a given command
-        return await _loadCommand(commandName);
+        returnString =  await _loadCommand(commandName);
       }
     }
 
-    return pageTitle;
+    return returnString;
   }
 
   Future<String> _randomCommand() async {
@@ -153,7 +156,6 @@ class CommandPage extends State<Command> {
             }
           }
           return const Center(
-            child: CircularProgressIndicator(),
           );
         },
         future: renderedFuture);

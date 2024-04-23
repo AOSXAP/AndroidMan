@@ -17,10 +17,9 @@ class ThemeHandler{
     return fontColor;
   }
 
-
   static Future<String> getTheme() async {
     /// Load current theme
-    AppData.initData();
+    await AppData.initData();
 
     try {
       selectedTheme = AppData.getPreference("theme")!;
@@ -32,7 +31,7 @@ class ThemeHandler{
   }
 
   static void setTheme(String theme)async{
-    AppData.initData();
+    await AppData.initData();
 
     if(theme == "dark" || theme == "light") {
       ThemeHandler.selectedTheme = theme;

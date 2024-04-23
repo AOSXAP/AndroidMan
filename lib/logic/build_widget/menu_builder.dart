@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/logic/build_widget/route_builder.dart';
+import 'package:flutter_application_1/theme/theme_handler.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 
 import 'package:flutter_application_1/screens/command/command.dart';
@@ -35,7 +37,7 @@ class BuildMenu{
           margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 2.5),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: Theme.of(context).cardColor,
+              color: ThemeHandler.selectedTheme == "light" ? Colors.white : Colors.black38,
               border: Border.all(
                 color: const Color.fromARGB(125, 0, 0, 0),
                 width: 1,
@@ -47,11 +49,7 @@ class BuildMenu{
               listItemTextColor: ThemeDefinition.accentColor,
             ),
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => initCommand,
-                ),
-              );
+              Navigator.of(context).push(FastRoutes.initRoute(initCommand, Duration.zero));
             },
           ),
         )

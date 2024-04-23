@@ -9,7 +9,7 @@ import '../../theme/theme_handler.dart';
 class AsyncMenu extends StatelessWidget {
   const AsyncMenu({super.key});
   static const String _title = 'Command to run';
-  static ThemeData selectedTheme = ThemeDefinition.lightTheme;
+  static ThemeData selectedTheme = ThemeDefinition.darkTheme;
 
   /// load async assets before displaying menu
   static Future<ThemeData> loadAssets(BuildContext context) async {

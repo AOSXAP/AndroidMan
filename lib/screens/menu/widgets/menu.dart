@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/logic/build_widget/route_builder.dart';
 import 'package:flutter_application_1/screens/menu/widgets/bookmarks.dart';
 import 'package:flutter_application_1/screens/menu/widgets/theme_widget.dart';
 import 'package:flutter_application_1/screens/regex_editor/regex_editor_widget.dart';
@@ -65,6 +66,7 @@ class Menu extends State<StatefulMenu> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -89,12 +91,8 @@ class Menu extends State<StatefulMenu> {
                 highlightColor: Theme.of(context).cardColor,
                 textColor: ThemeHandler.fontCol,
                 color: Theme.of(context).cardColor,
-                onPressed: (){
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const RegexEditorWidget(),
-                ),
-              );
+                onPressed: () async {
+              Navigator.of(context).push(FastRoutes.initRoute(const RegexEditorWidget(), Duration.zero));
             })
           ]),
           ...menuEntries,
