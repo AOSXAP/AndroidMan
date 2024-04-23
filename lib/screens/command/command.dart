@@ -33,6 +33,7 @@ class Command extends StatefulWidget {
 
 class CommandPage extends State<Command> {
   String pageTitle = "Command";
+  Future<String>? renderedFuture;
 
   /// list of command paragraphs and file sections
   List _commandParagraphs = [[]];
@@ -47,6 +48,7 @@ class CommandPage extends State<Command> {
   @override
   CommandPage(String cName) {
     pageTitle = cName;
+    renderedFuture = _renderCommand(pageTitle);
   }
 
   Future<String> _renderCommand(String commandName) async {
@@ -154,6 +156,6 @@ class CommandPage extends State<Command> {
             child: CircularProgressIndicator(),
           );
         },
-        future: (_renderCommand(pageTitle)));
+        future: renderedFuture);
   }
 }
