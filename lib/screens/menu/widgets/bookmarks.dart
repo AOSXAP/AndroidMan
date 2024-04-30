@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-
 import 'package:flutter_application_1/theme/theme_definition.dart';
 import 'package:flutter_application_1/theme/theme_handler.dart';
 import 'package:flutter_application_1/logic/menu/menu_logic.dart';
 import 'package:flutter_application_1/screens/menu/widgets/menu.dart';
 
 //ignore: must_be_immutable
-class BookmarksButtonWidget extends StatefulWidget
-{
+class BookmarksButtonWidget extends StatefulWidget {
   static Menu? men;
-  BookmarksButtonWidget(Menu menu, {super.key}){
+  /// Constructor to initialize the menu
+  BookmarksButtonWidget(Menu menu, {super.key}) {
     men = menu;
   }
   @override
@@ -18,26 +17,28 @@ class BookmarksButtonWidget extends StatefulWidget
 }
 
 class BookmarkButton extends State<BookmarksButtonWidget> {
+  /// Static variable to hold the menu
   static Menu? menu;
+  /// Variable to track button selection
   static bool selected = false;
   GFButtonType buttonT = GFButtonType.outline;
   Color fontColor = ThemeDefinition.accentColor;
 
-  BookmarkButton(Menu m){
+  BookmarkButton(Menu m) {
     menu = m;
   }
-
-  void buildButtonType(){
+  /// Function to toggle button type and font color
+  void buildButtonType() {
     selected = !selected;
 
     setState(() {
-      if(selected == true){
-        buttonT =  GFButtonType.solid;
+      if (selected == true) {
+        buttonT = GFButtonType.solid;
         fontColor = Colors.white;
-        if(ThemeHandler.selectedTheme == "dark"){
+        if (ThemeHandler.selectedTheme == "dark") {
           fontColor = Colors.black87;
         }
-      }else {
+      } else {
         buttonT = GFButtonType.outline;
         fontColor = ThemeDefinition.accentColor;
       }
@@ -51,11 +52,13 @@ class BookmarkButton extends State<BookmarksButtonWidget> {
       child: GFButtonBadge(
         onPressed: () {
           setState(() {
+            /// Toggle button type and font color
             buildButtonType();
-            if(menu != null && selected) {
+            /// Update menu entries based on button state
+            if (menu != null && selected) {
               menu!.updateMenuEntries(Logic.loadBookmarks(
                   Menu.menuEntries, Menu.commandWidgetMap, Menu.searchedTerm));
-            }else{
+            } else {
               menu!.updateMenuEntries(Logic.loadSearchedTerm(
                   Menu.menuEntries, Menu.commandWidgetMap, Menu.searchedTerm));
             }

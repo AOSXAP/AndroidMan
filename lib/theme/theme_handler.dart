@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/logic/appdata/appdata.dart';
 import 'package:flutter_application_1/theme/theme_definition.dart';
 
-class ThemeHandler{
+class ThemeHandler {
   static String selectedTheme = "light";
   static Color fontColor = Colors.white;
 
-  static get fontCol{
+  static get fontCol {
     fontColor = ThemeDefinition.accentColor;
 
-    if(ThemeHandler.selectedTheme == "dark"){
+    if (ThemeHandler.selectedTheme == "dark") {
       fontColor = Colors.white;
     }
 
@@ -23,26 +23,26 @@ class ThemeHandler{
 
     try {
       selectedTheme = AppData.getPreference("theme")!;
-    }catch(e){
+    } catch (e) {
       /// Init theme if it wasn't
       await AppData.setPreference("theme", "light");
     }
     return selectedTheme;
   }
 
-  static void setTheme(String theme)async{
+  static void setTheme(String theme) async {
     await AppData.initData();
 
-    if(theme == "dark" || theme == "light") {
+    if (theme == "dark" || theme == "light") {
       ThemeHandler.selectedTheme = theme;
       await AppData.setPreference("theme", theme);
     }
   }
 
-  static Future<ThemeData> selectCurrentTheme()async{
+  static Future<ThemeData> selectCurrentTheme() async {
     await ThemeHandler.getTheme();
 
-    if(selectedTheme == "dark"){
+    if (selectedTheme == "dark") {
       return ThemeDefinition.darkTheme;
     }
     return ThemeDefinition.lightTheme;

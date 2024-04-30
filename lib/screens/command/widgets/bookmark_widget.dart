@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_application_1/logic/bookmark/bookmark_handler.dart';
 import 'package:flutter_application_1/theme/theme_definition.dart';
 
 //ignore: must_be_immutable
 class BookmarkWidget extends StatefulWidget {
+  // Static variable to store the command
   static String? command;
 
-  BookmarkWidget(String c, {super.key}){
+  // Constructor to initialize the command
+  BookmarkWidget(String c, {super.key}) {
     command = c;
   }
 
@@ -20,13 +21,15 @@ class StatefulBookmarkWidget extends State<BookmarkWidget> {
   static String? commandName;
   List<String> bookmarks = [];
 
-  StatefulBookmarkWidget(String c){
+  // Constructor to set the command name and initialize bookmarks list
+  StatefulBookmarkWidget(String c) {
     commandName = c;
     bookmarks = BookmarkHandler.bookmarks;
   }
 
-  Icon getIcon(){
-    if(commandName != null) {
+  // Function to get the appropriate bookmark icon based on the command
+  Icon getIcon() {
+    if (commandName != null) {
       if (bookmarks.contains(commandName!)) {
         return Icon(
           Icons.bookmark_added_rounded,
@@ -45,22 +48,20 @@ class StatefulBookmarkWidget extends State<BookmarkWidget> {
 
   @override
   Widget build(BuildContext context) {
+    /// Build the bookmark button
     return TextButton(
         onPressed: () {
-          if(commandName != null) {
-            if(bookmarks.contains(commandName!)){
+          if (commandName != null) {
+            if (bookmarks.contains(commandName!)) {
               bookmarks.remove(commandName!);
-            }else {
+            } else {
               bookmarks.add(commandName!);
             }
           }
 
           BookmarkHandler.setBookmarks(bookmarks);
           setState(() {});
-
-          print(BookmarkHandler.bookmarks);
         },
-        child: getIcon()
-    );
+        child: getIcon());
   }
 }

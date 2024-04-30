@@ -11,7 +11,7 @@ class AsyncMenu extends StatelessWidget {
   static const String _title = 'Command to run';
   static ThemeData selectedTheme = ThemeDefinition.darkTheme;
 
-  /// load async assets before displaying menu
+  /// Load async assets before displaying menu
   static Future<ThemeData> loadAssets(BuildContext context) async {
     await BookmarkHandler.getBookmarks();
     return await ThemeHandler.selectCurrentTheme();
@@ -24,6 +24,7 @@ class AsyncMenu extends StatelessWidget {
             builder: (ctx, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
+                  /// Display error message if there is an error
                   return Center(
                     child: Text(
                       '${snapshot.error} occurred',
@@ -31,9 +32,11 @@ class AsyncMenu extends StatelessWidget {
                     ),
                   );
                 } else if (snapshot.hasData) {
+                  /// If the data is loaded succesfully, the selected theme is set
                   final data = snapshot.data;
                   AsyncMenu.selectedTheme = data!;
 
+                  /// Return the selected materialApp with the corresponding theme and menu
                   MaterialApp coreApp = MaterialApp(
                       title: _title,
                       theme: AsyncMenu.selectedTheme,
@@ -41,6 +44,8 @@ class AsyncMenu extends StatelessWidget {
                   return coreApp;
                 }
               }
+              /// When this part of code runs, it displays a circulr indicator until the loadAssets function completes its
+              /// execution. Once the assets are loaded, the FutureBuilder will build a widget with the loaded data
               return const Center(
                 child: CircularProgressIndicator(),
               );

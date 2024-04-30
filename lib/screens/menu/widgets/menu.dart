@@ -3,7 +3,6 @@ import 'package:flutter_application_1/logic/build_widget/route_builder.dart';
 import 'package:flutter_application_1/screens/menu/widgets/bookmarks.dart';
 import 'package:flutter_application_1/screens/menu/widgets/theme_widget.dart';
 import 'package:flutter_application_1/screens/regex_editor/regex_editor_widget.dart';
-import 'package:flutter_application_1/theme/theme_definition.dart';
 import 'package:flutter_application_1/theme/theme_handler.dart';
 import 'package:flutter_application_1/utils/read_commands.dart';
 import 'package:getwidget/getwidget.dart';
@@ -30,7 +29,7 @@ class Menu extends State<StatefulMenu> {
   }
 
   void initMenu() async {
-    ///Description: init Menu
+    /// Description: init Menu
     var commands = await readCommands();
 
     /// map commandName - Widget
@@ -42,33 +41,33 @@ class Menu extends State<StatefulMenu> {
     }
 
     setState(() {
-      ///update global map
+      /// Update global map
       commandWidgetMap = widgetMap;
     });
   }
 
-  void updateMenuEntries(List<Widget> newMenuEntries){
-    setState((){
+  void updateMenuEntries(List<Widget> newMenuEntries) {
+    setState(() {
       menuEntries = newMenuEntries;
     });
   }
 
   void reloadMenu() {
-    ///Description: reload menu and reset entries
+    /// Description: reload menu and reset entries
     setState(() {
-      if(BookmarkButton.selected == false) {
+      if (BookmarkButton.selected == false) {
         menuEntries =
             Logic.loadSearchedTerm(menuEntries, commandWidgetMap, searchedTerm);
-      }else {
+      } else {
         menuEntries =
             Logic.loadBookmarks(menuEntries, commandWidgetMap, searchedTerm);
       }
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
+    /// Build the menu UI
     return Container(
         color: Theme.of(context).cardColor,
         child: SingleChildScrollView(
@@ -87,13 +86,14 @@ class Menu extends State<StatefulMenu> {
           Row(children: [
             BookmarksButtonWidget(this),
             GFButton(
-              text: "Regex",
+                text: "Regex",
                 highlightColor: Theme.of(context).cardColor,
                 textColor: ThemeHandler.fontCol,
                 color: Theme.of(context).cardColor,
                 onPressed: () async {
-              Navigator.of(context).push(FastRoutes.initRoute(const RegexEditorWidget(), Duration.zero));
-            })
+                  Navigator.of(context).push(FastRoutes.initRoute(
+                      const RegexEditorWidget(), Duration.zero));
+                })
           ]),
           ...menuEntries,
         ])));
